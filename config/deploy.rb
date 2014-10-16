@@ -33,6 +33,10 @@ namespace :deploy do
   end
 end
 
+task :unicorn_debug, :roles => :app do
+  logger.important("UNICORN PID: #{unicorn_get_pid}", "Unicorn")
+end
+
 after :deploy, 'deploy:tag_ref'
 after :deploy, 'deploy:tag_ref'
 after 'deploy:publishing', 'deploy:restart'
