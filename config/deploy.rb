@@ -3,7 +3,7 @@ lock '3.2.1'
 set :rbenv_ruby, '2.1.2'
 
 set :application, 'ten_moves_web'
-set :repo_url, 'https://github.com/davidpdrsn/Ten-Moves-Api.git'
+set :repo_url, 'git@github.com:davidpdrsn/Ten-Moves-Api.git'
 set :user, "deployer"
 
 set :deploy_to, "/home/#{fetch :user}/apps/#{fetch :application}"
