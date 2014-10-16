@@ -11,6 +11,14 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'figaro', '~> 1.0.0'
 
+gem 'unicorn'
+
+gem 'capistrano', '~> 3.2.0'
+gem 'capistrano-rails', '~> 1.1'
+gem 'capistrano-bundler', '~> 1.1.2'
+gem 'capistrano3-unicorn'
+gem 'capistrano-rbenv', '~> 2.0'
+
 group :test, :development do
   gem 'rspec-rails'
   gem 'spring'
