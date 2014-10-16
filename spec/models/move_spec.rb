@@ -1,27 +1,25 @@
 require 'rails_helper'
 
 describe Move do
-  describe '.most_recent' do
-    it 'returns the 10 most recent moves' do
+  it { should validate_presence_of :name }
+
+  describe '#most_popular_names' do
+    it 'returns the most popular moves' do
+      create(:move, name: 'one')
+      create(:move, name: 'one')
+      create(:move, name: 'one')
       12.times do |i|
         create(:move, name: "Sybil #{i}")
       end
-      create(:move, name: 'newest move')
 
-      expect(Move.most_recent.count).to eq(10)
-      expect(Move.most_recent.first.name).to eq('newest move')
+      moves = Move.most_popular_names
+
+      expect(moves.length).to eq(10)
+      expect(moves).to include('one')
     end
 
     it 'returns an empty array when there are no moves' do
-      expect(Move.most_recent).to eq([])
-    end
-
-    it 'returns all the moves when there are less than 10 moves' do
-      create(:move, name: 'one')
-      create(:move, name: 'two')
-      create(:move, name: 'three')
-
-      expect(Move.most_recent.map(&:name)).to eq(['three', 'two', 'one'])
+      expect(Move.most_popular_names).to eq([])
     end
   end
 end
