@@ -1,0 +1,18 @@
+development:
+  adapter: postgresql
+  database: ten_moves_web_development
+  host: localhost
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: ten_moves_web_production
+  pool: 5
+  host: localhost
+  username: ten_moves_web
+  password: secret
+
+test:
+  adapter: postgresql
+  database: ten_moves_web_test
+  host: localhost
