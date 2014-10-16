@@ -12,7 +12,7 @@
 # Description:       starts unicorn
 ### END INIT INFO
 
-DAEMON=/usr/bin/unicorn
+DAEMON=/home/deployer/apps/ten_moves_web/current/bin/unicorn
 DAEMON_OPTS="-c /home/deployer/apps/ten_moves_web/current/config/unicorn.rb -D"
 NAME=unicorn
 DESC="Unicorn app for ten moves web"
