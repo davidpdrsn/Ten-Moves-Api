@@ -1,0 +1,6 @@
+#!/bin/sh
+
+bundle install
+bin/rake db:create db:migrate RAILS_ENV=test
+bin/rake db:create db:migrate
+bin/rspec
