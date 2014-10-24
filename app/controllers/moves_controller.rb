@@ -1,5 +1,6 @@
 class MovesController < ApplicationController
   before_action :require_secret
+  protect_from_forgery except: :create
 
   rescue_from ActionController::ParameterMissing, ActiveRecord::RecordInvalid do
     render json: { error: "Move params are missing or invalid" }, status: :unprocessable_entity
