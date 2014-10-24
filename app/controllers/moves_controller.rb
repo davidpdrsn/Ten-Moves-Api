@@ -1,5 +1,5 @@
 class MovesController < ApplicationController
-  before_action :require_secret
+  before_action :require_api_key
   protect_from_forgery except: :create
 
   rescue_from ActionController::ParameterMissing, ActiveRecord::RecordInvalid do
@@ -26,7 +26,7 @@ class MovesController < ApplicationController
     params.require(:move).permit(:name)
   end
 
-  def require_secret
+  def require_api_key
     unless params[:api_key] == ENV["api_key"]
       render json: { error: "Wrong key" }, status: :unauthorized
     end
