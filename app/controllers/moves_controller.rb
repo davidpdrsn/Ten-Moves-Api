@@ -7,7 +7,9 @@ class MovesController < ApplicationController
   end
 
   def index
-    render json: Move.most_popular_names
+    moves = Move.all
+    top_list = TopList.new(moves)
+    render json: top_list.top(10, :name)
   end
 
   def create

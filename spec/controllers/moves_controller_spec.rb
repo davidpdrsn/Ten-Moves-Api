@@ -43,6 +43,10 @@ describe MovesController do
     end
   end
 
+  describe '#delete' do
+    pending
+  end
+
   def json_response
     JSON.parse(response.body)
   end
