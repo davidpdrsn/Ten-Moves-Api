@@ -13,17 +13,16 @@ class MovesController < ApplicationController
   end
 
   def create
-    @move = Move.new(move_params)
+    move = NormalizedMove.new(Move.new(move_params), normalizer)
+    move.name = move.normalized_name
 
-    if @move.save!
-      render json: @move, status: :created
+    if move.save!
+      render json: move, status: :created
     end
   end
 
   def delete_move_by_name
-    move = Move.all.detect do |move|
-      NormalizeMoveName.new(MethodChain).normalize(params[:name]) == move.name
-    end
+    move = Move.all.detect { |move| normalizer.normalize(params[:name]) == move.name }
 
     if move.try(:destroy)
       render nothing: true
@@ -35,8 +34,7 @@ class MovesController < ApplicationController
   private
 
   def move_params
-    permitted_params = params.require(:move).permit(:name)
-    normalized_params(permitted_params.clone)
+    params.require(:move).permit(:name)
   end
 
   def require_api_key
@@ -45,9 +43,7 @@ class MovesController < ApplicationController
     end
   end
 
-  def normalized_params(params)
-    new_params = params.clone
-    new_params[:name] = NormalizeMoveName.new(MethodChain).normalize(params[:name])
-    new_params
+  def normalizer
+    NormalizeMoveName.new(MethodChain)
   end
 end
