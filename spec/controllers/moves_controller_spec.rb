@@ -41,6 +41,11 @@ describe MovesController do
 
       expect(response.status).to eq(422)
     end
+
+    it 'normalizes the input' do
+      post :create, format: :json, api_key: ENV["api_key"], move: { name: "a move" }
+      expect(Move.first.name).to eq "A Move"
+    end
   end
 
   describe '#delete' do

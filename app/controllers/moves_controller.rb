@@ -23,12 +23,19 @@ class MovesController < ApplicationController
   private
 
   def move_params
-    params.require(:move).permit(:name)
+    permitted_params = params.require(:move).permit(:name)
+    normalized_params(permitted_params.clone)
   end
 
   def require_api_key
     unless params[:api_key] == ENV["api_key"]
       render json: { error: "Wrong key" }, status: :unauthorized
     end
+  end
+
+  def normalized_params(params)
+    new_params = params.clone
+    new_params[:name] = NormalizeMoveName.new(MethodChain).normalize(params[:name])
+    new_params
   end
 end

@@ -5,6 +5,8 @@ require 'rspec/rails'
 
 require 'shoulda/matchers'
 
+Dir[Rails.root.join("app/**/*.rb")].each { |f| require f }
+
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
