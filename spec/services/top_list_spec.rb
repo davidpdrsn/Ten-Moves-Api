@@ -1,4 +1,5 @@
 require 'rails_helper'
+require_relative '../../app/services/top_list'
 
 describe TopList do
   describe '#top' do
