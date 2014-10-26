@@ -1,6 +1,6 @@
 class MovesController < ApplicationController
   before_action :require_api_key
-  protect_from_forgery except: :create
+  protect_from_forgery except: [:create, :delete_move_by_name]
 
   rescue_from ActionController::ParameterMissing, ActiveRecord::RecordInvalid do
     render json: { error: "Move params are missing or invalid" }, status: :unprocessable_entity
@@ -17,6 +17,18 @@ class MovesController < ApplicationController
 
     if @move.save!
       render json: @move, status: :created
+    end
+  end
+
+  def delete_move_by_name
+    move = Move.all.detect do |move|
+      NormalizeMoveName.new(MethodChain).normalize(params[:name]) == move.name
+    end
+
+    if move.try(:destroy)
+      render nothing: true
+    else
+      render nothing: true, status: :unprocessable_entity
     end
   end
 

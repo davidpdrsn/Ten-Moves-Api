@@ -49,7 +49,27 @@ describe MovesController do
   end
 
   describe '#delete' do
-    pending
+    it 'deletes moves' do
+      move = create :move
+      delete "delete_move_by_name", api_key: ENV["api_key"], name: move.name
+
+      expect(Move.count).to eq 0
+      expect(response.status).to eq 200
+    end
+
+    it 'does not require the name to be normalized in the params' do
+      move = create :move, name: "Mocking Bird"
+      delete "delete_move_by_name", api_key: ENV["api_key"], name: 'mocking bird'
+
+      expect(Move.count).to eq 0
+      expect(response.status).to eq 200
+    end
+
+    it "doesn't delete moves that are not there" do
+      delete "delete_move_by_name", api_key: ENV["api_key"], name: "not a name"
+
+      expect(response.status).to eq 422
+    end
   end
 
   def json_response
