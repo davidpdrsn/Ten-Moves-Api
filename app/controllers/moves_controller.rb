@@ -21,7 +21,7 @@ class MovesController < ApiController
   end
 
   def delete_move_by_name
-    move = Move.all.detect { |move| normalizer.normalize(params[:name]) == move.name }
+    move = Move.find_by(name: normalizer.normalize(params[:name]))
 
     if move.try(:destroy)
       render nothing: true
