@@ -26,7 +26,7 @@ class MovesController < ApiController
     if move.try(:destroy)
       render nothing: true
     else
-      render nothing: true, status: :unprocessable_entity
+      head :unprocessable_entity
     end
   end
 
