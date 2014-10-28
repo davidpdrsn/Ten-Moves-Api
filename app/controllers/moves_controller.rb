@@ -1,5 +1,4 @@
-class MovesController < ApplicationController
-  before_action :restrict_access
+class MovesController < ApiController
   protect_from_forgery except: [:create, :delete_move_by_name]
 
   rescue_from ActionController::ParameterMissing, ActiveRecord::RecordInvalid do
@@ -35,10 +34,6 @@ class MovesController < ApplicationController
 
   def move_params
     params.require(:move).permit(:name)
-  end
-
-  def restrict_access
-    head :unauthorized unless params[:api_key] == ENV['api_key']
   end
 
   def normalizer
