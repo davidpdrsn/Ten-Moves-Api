@@ -10,6 +10,6 @@ class Searcher
   private
 
   def all_matches(property, query)
-    Move.where("#{property} ILIKE ?", "%#{query}%").limit(10)
+    @record_type.where("#{property} ILIKE ?", "%#{query}%").limit(10)
   end
 end
