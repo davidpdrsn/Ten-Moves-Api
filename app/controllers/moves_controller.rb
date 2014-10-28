@@ -38,9 +38,7 @@ class MovesController < ApplicationController
   end
 
   def require_api_key
-    unless params[:api_key] == ENV["api_key"]
-      render json: { error: "Wrong key" }, status: :unauthorized
-    end
+    head :unauthorized unless params[:api_key] == ENV['api_key']
   end
 
   def normalizer

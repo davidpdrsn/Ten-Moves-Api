@@ -12,7 +12,6 @@ describe MovesController do
 
     it 'requires the api key' do
       get :index, format: :json, api_key: "wrong-key"
-      expect(json_response['error']).to_not be_nil
       expect(response.status).to eq(401)
     end
   end
