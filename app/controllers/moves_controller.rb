@@ -6,9 +6,8 @@ class MovesController < ApiController
   end
 
   def index
-    moves = Move.all
-    top_list = TopList.new(moves)
-    render json: top_list.top(10, :name)
+    moves = TopList.new(Move.all).top(10, :name)
+    render json: moves
   end
 
   def create
