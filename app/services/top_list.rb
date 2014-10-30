@@ -4,24 +4,37 @@ class TopList
   end
 
   def top(count, method_name)
-    responses_to_message(method_name).take(count)
+    ResponseFrequencies.new(@things, method_name).take(count)
   end
 
   private
 
-  def responses_to_message(method_name)
-    responses_grouped_by_frequency(method_name).map(&:first)
-  end
+  class ResponseFrequencies
+    def initialize(things, method_name)
+      @things = things
+      @method_name = method_name
+    end
 
-  def responses_grouped_by_frequency(method_name)
-    values_and_their_count(method_name).sort_by(&:last).reverse
-  end
+    def take(count)
+      responses_to_message.take(count)
+    end
 
-  def values_and_their_count(method_name)
-    @things.inject(Hash.new(0)) do |acc, thing|
-      value = thing.public_send(method_name)
-      acc[value] = acc[value] + 1
-      acc
-    end.to_a
+    private
+
+    def responses_to_message
+      responses_sorted_by_frequency.map(&:first)
+    end
+
+    def responses_sorted_by_frequency
+      values_and_their_count.sort_by(&:last).reverse
+    end
+
+    def values_and_their_count
+      @things.inject(Hash.new(0)) do |acc, thing|
+        value = thing.public_send(@method_name)
+        acc[value] = acc[value] + 1
+        acc
+      end.to_a
+    end
   end
 end
