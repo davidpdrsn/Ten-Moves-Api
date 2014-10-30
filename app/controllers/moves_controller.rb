@@ -11,7 +11,7 @@ class MovesController < ApiController
   end
 
   def create
-    move = normalized_move(Move.new(move_params), normalizer)
+    move = NormalizedMove.new(Move.new(move_params), normalizer)
 
     if move.save!
       render json: move, status: :created
@@ -36,10 +36,5 @@ class MovesController < ApiController
 
   def normalizer
     NormalizeMoveName.new(MethodChain)
-  end
-
-  def normalized_move(move, normalizer)
-    move.name = normalizer.normalize(move.name)
-    move
   end
 end
