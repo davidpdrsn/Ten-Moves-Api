@@ -3,4 +3,6 @@ Rails.application.routes.draw do
   delete "delete_move_by_name", to: "moves#delete_move_by_name"
 
   get '/search', to: 'searches#show', as: :new_search
+
+  root to: 'home#index'
 end

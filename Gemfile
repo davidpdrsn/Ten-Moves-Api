@@ -14,6 +14,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'figaro', '~> 1.0.0'
 
 group :test, :development do
+  gem 'capybara'
+  gem 'capybara-webkit'
   gem 'rspec-rails'
   gem 'spring'
   gem 'shoulda-matchers', require: false
