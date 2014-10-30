@@ -4,7 +4,8 @@ class TopList
   end
 
   def top(count, method_name)
-    hash_to_array(values_and_their_count(method_name))
+    values_and_their_count(method_name)
+      .to_a
       .sort_by(&:last)
       .reverse
       .take(10)
@@ -18,12 +19,6 @@ class TopList
       value = thing.public_send(method_name)
       acc[value] = acc[value] + 1
       acc
-    end
-  end
-
-  def hash_to_array(hash)
-    hash.inject([]) do |acc, (value, count)|
-      acc << [value, count]
     end
   end
 end
