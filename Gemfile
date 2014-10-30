@@ -24,3 +24,8 @@ group :test, :development do
   gem 'thin'
   gem 'pry-rails'
 end
+
+gem 'capistrano'
+gem 'capistrano-rbenv'
+gem 'capistrano-bundler'
+gem 'capistrano-rails'
