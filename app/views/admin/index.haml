@@ -1,0 +1,18 @@
+%div.stats
+  %h1 Stats
+  %dl
+    %dt
+      Number of moves:
+    %dd
+      = @dashboard.count
+
+%div.top-list
+  %h1 Top list
+  %dl
+  - if @dashboard.empty?
+    There are no moves
+  - else
+    %ul
+      - @dashboard.top_list.each do |move|
+        %li
+          = move
