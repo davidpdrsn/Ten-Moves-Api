@@ -13,11 +13,11 @@ describe TopList do
       expect(top_list.top(10, :name)).to eq ['c', 'b', 'a']
     end
 
-    it 'does not return more than 10 things' do
+    it 'does not return more than n things' do
       things = ('a'..'z').map { |letter| double(name: letter) }
       top_list = TopList.new(things)
 
-      expect(top_list.top(10, :name).length).to eq 10
+      expect(top_list.top(8, :name).length).to eq 8
     end
 
     it 'returns an empty array when there are no things' do
