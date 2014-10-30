@@ -4,7 +4,7 @@
     %dt
       Number of moves:
     %dd
-      = @dashboard.count
+      = @dashboard.total_moves_count
 
 %div.top-list
   %h1 Top list
@@ -14,5 +14,5 @@
   - else
     %ul
       - @dashboard.top_list.each do |move|
-        %li
+        %li{"data-id" => 1}
           = move

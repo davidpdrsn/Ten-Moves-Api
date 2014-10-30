@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 describe Dashboard do
-  describe '#count' do
+  describe '#total_moves_count' do
     it 'returns the number of moves' do
-      expect(Dashboard.new(10, double).count).to eq 10
+      expect(Dashboard.new(10, double).total_moves_count).to eq 10
     end
   end
 

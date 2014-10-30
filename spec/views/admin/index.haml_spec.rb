@@ -19,12 +19,12 @@ describe 'admin/index.haml' do
     expect(rendered).to match /There are no moves/
   end
 
-  def build_dashboard(count, top_list)
+  def build_dashboard(total_moves_count, top_list)
     double(
       'dashboard',
-      count: count,
+      total_moves_count: total_moves_count,
       top_list: top_list,
-      empty?: count == 0,
+      empty?: total_moves_count == 0,
     )
   end
 end

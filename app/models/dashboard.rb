@@ -1,12 +1,12 @@
 class Dashboard
-  attr_reader :count, :top_list
+  attr_reader :total_moves_count, :top_list
 
-  def initialize(count, top_list)
-    @count = count
+  def initialize(total_moves_count, top_list)
+    @total_moves_count = total_moves_count
     @top_list = top_list
   end
 
   def empty?
-    @count == 0
+    @total_moves_count == 0
   end
 end
