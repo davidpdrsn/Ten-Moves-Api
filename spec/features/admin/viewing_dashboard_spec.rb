@@ -3,6 +3,7 @@ require 'rails_helper'
 feature 'viewing dashboard' do
   scenario 'user sees number of moves' do
     create :move
+    authenticate
     visit admin_path
 
     within ".stats" do
@@ -13,6 +14,7 @@ feature 'viewing dashboard' do
   scenario 'user sees the top list of moves' do
     11.times { |i| create :move, name: "move ##{i}" }
 
+    authenticate
     visit admin_path
 
     within ".top-list" do
@@ -20,5 +22,9 @@ feature 'viewing dashboard' do
         expect(page).to have_css "li", text: "move ##{i}"
       end
     end
+  end
+
+  def authenticate
+    page.driver.browser.authorize(ENV['admin_username'], ENV['admin_password'])
   end
 end
