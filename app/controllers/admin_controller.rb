@@ -1,10 +1,11 @@
 class AdminController < ApplicationController
-  before_filter :authenticate
 
   def index
     top_list = TopList.new(Move.all).top(10, :name)
     @dashboard = Dashboard.new(Move.count, top_list)
   end
+
+  before_filter :authenticate
 
   protected
 
