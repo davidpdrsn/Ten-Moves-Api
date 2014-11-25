@@ -15,4 +15,4 @@
     %ul
       - @dashboard.top_list.each do |move|
         %li{"data-id" => 1}
-          = move
+          = "#{move} (#{Move.number_of_moves_with_name(move)})"
